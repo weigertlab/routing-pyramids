@@ -153,7 +153,7 @@ wheels = [
 [[package]]
 name = "betterplots"
 version = "0.1.0"
-source = { git = "https://github.com/maweigert/betterplots#3a2c3bd7646290c5748e463553f33368ea8253bd" }
+source = { git = "https://github.com/maweigert/betterplots?rev=3a2c3bd7646290c5748e463553f33368ea8253bd#3a2c3bd7646290c5748e463553f33368ea8253bd" }
 dependencies = [
     { name = "numpy" },
     { name = "seaborn" },
@@ -1741,7 +1741,7 @@ dependencies = [
     { name = "zarr" },
 ]
 
-[package.dev-dependencies]
+[package.optional-dependencies]
 analysis = [
     { name = "betterplots" },
     { name = "matplotlib" },
@@ -1750,6 +1750,8 @@ analysis = [
     { name = "seaborn" },
     { name = "umap-learn" },
 ]
+
+[package.dev-dependencies]
 dev = [
     { name = "pyrefly" },
     { name = "pytest" },
@@ -1758,27 +1760,26 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "betterplots", marker = "extra == 'analysis'", git = "https://github.com/maweigert/betterplots?rev=3a2c3bd7646290c5748e463553f33368ea8253bd" },
     { name = "cmap", specifier = ">=0.7.2" },
     { name = "einops", specifier = ">=0.8.1" },
     { name = "lightning" },
+    { name = "matplotlib", marker = "extra == 'analysis'", specifier = ">=3.10.8" },
     { name = "numpy" },
+    { name = "pandas", marker = "extra == 'analysis'" },
     { name = "scikit-image", specifier = ">=0.25.2" },
+    { name = "scikit-learn", marker = "extra == 'analysis'", specifier = ">=1.9.0" },
+    { name = "seaborn", marker = "extra == 'analysis'", specifier = ">=0.13.2" },
     { name = "tensorboard", specifier = ">=2.20.0" },
     { name = "tifffile", extras = ["codecs"], specifier = ">=2026.1.14" },
     { name = "torch" },
     { name = "torchvision", specifier = ">=0.21.0" },
+    { name = "umap-learn", marker = "extra == 'analysis'", specifier = ">=0.5.12" },
     { name = "zarr", specifier = ">=3.2.1" },
 ]
+provides-extras = ["analysis"]
 
 [package.metadata.requires-dev]
-analysis = [
-    { name = "betterplots", git = "https://github.com/maweigert/betterplots" },
-    { name = "matplotlib", specifier = ">=3.10.8" },
-    { name = "pandas" },
-    { name = "scikit-learn", specifier = ">=1.9.0" },
-    { name = "seaborn", specifier = ">=0.13.2" },
-    { name = "umap-learn", specifier = ">=0.5.12" },
-]
 dev = [
     { name = "pyrefly", specifier = ">=0.53.0" },
     { name = "pytest", specifier = ">=9.0.2" },

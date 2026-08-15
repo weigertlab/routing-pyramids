@@ -1,17 +1,16 @@
 # Routing Pyramids
 
-This package contains the generative routing-pyramid models and experiment
-entry points for unsupervised instance segmentation described in the
-[Routing Pyramids paper project](https://github.com/weigertlab/routing-pyramids).
+Official implementation of
+_Unsupervised Learning of Cell Instances with Generative Routing Pyramids_.
 
 ## Install
 
 Create the development environment with `uv sync`. Publication-analysis
-dependencies are installed with `uv sync --group analysis`. Without uv, install
-the analysis requirements and the Weigert Lab plotting package with
-`pip install git+https://github.com/maweigert/betterplots`.
+dependencies are an optional extra used only by the two `visualize_*.py`
+scripts; train and predict scripts need only the core package. Install them
+with `uv sync --extra analysis` or `pip install .[analysis]`.
 
-A wheel can be built with `uv build --no-sources` and installed with pip.
+A wheel can be built with `uv build` and installed with pip.
 
 ## Experiment data
 

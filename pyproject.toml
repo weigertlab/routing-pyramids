@@ -17,20 +17,22 @@ dependencies = [
     "zarr>=3.2.1",
 ]
 
-[build-system]
-requires = ["uv_build>=0.12.5,<0.13.0"]
-build-backend = "uv_build"
-
-[dependency-groups]
-dev = ["pyrefly>=0.53.0", "pytest>=9.0.2", "ruff>=0.16.3"]
+[project.optional-dependencies]
 analysis = [
     "matplotlib>=3.10.8",
     "pandas",
     "seaborn>=0.13.2",
     "scikit-learn>=1.9.0",
     "umap-learn>=0.5.12",
-    "betterplots",
+    "betterplots @ git+https://github.com/maweigert/betterplots@3a2c3bd7646290c5748e463553f33368ea8253bd",
 ]
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = ["pyrefly>=0.53.0", "pytest>=9.0.2", "ruff>=0.16.3"]
 
 [tool.ruff]
 lint.extend-select = ["I001"]
@@ -40,6 +42,3 @@ lint.isort.known-first-party = ["routing_pyramids"]
 # for relative import inside tests
 search_path = ["."]
 project-includes = ["src/**/*.py*", "examples/**/*.py*", "tests/**/*.py*"]
-
-[tool.uv.sources]
-betterplots = { git = "https://github.com/maweigert/betterplots" }
