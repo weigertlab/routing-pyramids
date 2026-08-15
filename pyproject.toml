@@ -1,0 +1,56 @@
+[project]
+name = "routing-pyramids"
+version = "0.1.0"
+description = "Unsupervised Learning of Cell Instances with Generative Routing Pyramids"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "torch",
+    "lightning",
+    "tensorboard>=2.20.0",
+    "tifffile[codecs]>=2026.1.14",
+    "scikit-image>=0.25.2",
+    "torchvision>=0.21.0",
+    "einops>=0.8.1",
+    "cmap>=0.7.2",
+    "zarr>=3.2.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = ["pyrefly>=0.53.0", "pytest>=9.0.2", "ruff>=0.14.13"]
+analysis = [
+    "matplotlib>=3.10.8",
+    "pandas",
+    "seaborn>=0.13.2",
+    "scikit-learn>=1.9.0",
+    "umap-learn>=0.5.12",
+    "betterplots",
+]
+
+[tool.ruff]
+lint.extend-select = ["I001"]
+lint.ignore = [
+    # "B008",
+    # "C408",
+    # "PYI041",
+    # "RUF059",
+    # "TRY004",
+    # "UP033",
+    # "UP037",
+    # "UP045",
+    # "UP046",
+]
+lint.isort.known-first-party = ["routing_pyramids"]
+
+[tool.pyrefly]
+# for relative import inside tests
+search_path = ["."]
+project-includes = ["src/**/*.py*", "examples/**/*.py*", "tests/**/*.py*"]
+
+[tool.uv.sources]
+betterplots = { git = "https://github.com/maweigert/betterplots" }
