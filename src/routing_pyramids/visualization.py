@@ -18,7 +18,7 @@ def pca_colorize(features: Tensor) -> Tensor:
     Tensor
         RGB tensor (B, 3, H, W) with values in [0, 1].
     """
-    B, D, H, W = features.shape
+    B, _D, H, W = features.shape
     features = features.float()
     flat = features.flatten(2).permute(0, 2, 1)  # (B, H*W, D)
 

@@ -99,7 +99,7 @@ class BaseTemporalDataModule(L.LightningDataModule):
         if not isinstance(train_repeat_factor, int) or isinstance(
             train_repeat_factor, bool
         ):
-            raise ValueError(
+            raise TypeError(
                 f"train_repeat_factor must be an integer, got {train_repeat_factor!r}"
             )
         if train_repeat_factor < 1:

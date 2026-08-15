@@ -1,5 +1,7 @@
 """Unit tests for CTC temporal data loading."""
 
+from functools import partial
+
 import numpy as np
 import pytest
 import tifffile
@@ -166,7 +168,8 @@ def test_ctc_predict_loader_emits_full_frames_and_metadata(mock_ctc_data_dir):
 def test_ctc_val_temporal_indices_not_affected_by_prior_rng_consumption(
     mock_ctc_data_dir,
 ):
-    kwargs = dict(
+    dm = partial(
+        VideoTemporalDataModule,
         data_dir=str(mock_ctc_data_dir),
         dataset_class=CTCVideoDataset,
         train_split="test",
@@ -179,7 +182,7 @@ def test_ctc_val_temporal_indices_not_affected_by_prior_rng_consumption(
     )
 
     torch.manual_seed(123)
-    dm_a = VideoTemporalDataModule(**kwargs)
+    dm_a = dm()
     dm_a.setup("fit")
     assert dm_a.val_ds is not None
     idx_a = dm_a.val_ds.fixed_frame_indices
@@ -187,7 +190,7 @@ def test_ctc_val_temporal_indices_not_affected_by_prior_rng_consumption(
 
     torch.manual_seed(123)
     _ = torch.rand(10_000)
-    dm_b = VideoTemporalDataModule(**kwargs)
+    dm_b = dm()
     dm_b.setup("fit")
     assert dm_b.val_ds is not None
     idx_b = dm_b.val_ds.fixed_frame_indices

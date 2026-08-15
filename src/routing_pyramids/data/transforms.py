@@ -149,7 +149,7 @@ class DetectionTransform:
 
         outputs = self.transforms(video_tv, *present_masks)
         if not isinstance(outputs, tuple):
-            raise RuntimeError("Expected tuple output when transforming masks")
+            raise TypeError("Expected tuple output when transforming masks")
         out_video = outputs[0]
         out_present_masks = outputs[1:]
         if len(out_present_masks) != len(present_masks):

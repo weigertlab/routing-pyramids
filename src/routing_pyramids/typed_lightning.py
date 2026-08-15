@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, Generic, ParamSpec, TypeVar
+from typing import Any, ParamSpec, TypeVar
 
 from lightning.pytorch import LightningModule
 from torch import Tensor
@@ -14,10 +14,13 @@ StepOutputT = TypeVar("StepOutputT", bound=LightningStepOutput)
 PredictOutputT = TypeVar("PredictOutputT")
 
 
-class TypedLightningModule(
-    LightningModule,
-    Generic[BatchT, ForwardP, ForwardOutputT, StepOutputT, PredictOutputT],
-):
+class TypedLightningModule[
+    BatchT,
+    **ForwardP,
+    ForwardOutputT,
+    StepOutputT: LightningStepOutput,
+    PredictOutputT,
+](LightningModule):
     """
     Typed wrapper around Lightning's variadic hook surface.
 

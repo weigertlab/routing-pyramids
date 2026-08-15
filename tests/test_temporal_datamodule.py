@@ -156,12 +156,11 @@ def test_video_temporal_datamodule_train_repeat_factor_reuses_cache(tmp_path):
 
 @pytest.mark.parametrize("train_repeat_factor", [0, -1, 1.5, True])
 def test_video_temporal_datamodule_rejects_invalid_train_repeat_factor(
-    tmp_path,
-    train_repeat_factor,
+    tmp_path, train_repeat_factor
 ):
     _prepare_ctc_layout(tmp_path)
-
-    with pytest.raises(ValueError, match="train_repeat_factor"):
+    expected_error = TypeError if train_repeat_factor in (True, 1.5) else ValueError
+    with pytest.raises(expected_error, match="train_repeat_factor"):
         VideoTemporalDataModule(
             data_dir=str(tmp_path),
             dataset_class=CTCVideoDataset,

@@ -192,11 +192,8 @@ def test_ome_zarr_dataset_rejects_missing_multiscales(tmp_path: Path) -> None:
     store_name = "video.ome.zarr"
     _write_ome_zarr(tmp_path, store_name, data, include_multiscales=False)
 
-    with pytest.raises(ValueError, match="OME metadata"):
-        OMEZarrVideoDataset(
-            root_dir=str(tmp_path),
-            store_names=(store_name,),
-        )
+    with pytest.raises(TypeError, match="OME metadata"):
+        OMEZarrVideoDataset(root_dir=str(tmp_path), store_names=(store_name,))
 
 
 def test_ome_zarr_dataset_rejects_invalid_ome_axes(tmp_path: Path) -> None:

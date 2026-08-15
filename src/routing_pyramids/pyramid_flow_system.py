@@ -1336,6 +1336,7 @@ class PyramidFlowSystem(
         Optional flow-induced segmentation evaluation settings.
     """
 
+    # ruff: disable[B008]
     def __init__(
         self,
         *,
@@ -1530,7 +1531,7 @@ class PyramidFlowSystem(
         _validate_spatial_tensor("image", image, channels=self.in_channels)
         encoder_output = self.encoder(image)
         if not isinstance(encoder_output, PyramidFlowEncoderOutput):
-            raise RuntimeError(
+            raise TypeError(
                 "encoder must return PyramidFlowEncoderOutput with deterministic "
                 "bottleneck features"
             )
@@ -1872,7 +1873,6 @@ class PyramidFlowSystem(
         *, assignment: Tensor, transport: PyramidTransport
     ) -> Tensor:
         batch_size, num_pixels, num_fine = assignment.shape
-        fine_h, fine_w = transport.lookup.fine_hw
         coarse_h, coarse_w = transport.lookup.coarse_hw
         num_coarse = int(coarse_h) * int(coarse_w)
         probs = rearrange(transport.probs.float(), "b k h w -> b (h w) k")

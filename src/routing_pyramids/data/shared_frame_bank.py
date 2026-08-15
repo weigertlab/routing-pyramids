@@ -42,7 +42,7 @@ def _read_frame_shape(path) -> tuple[int, int]:
 def validate_scale_factor(scale_factor: float) -> float:
     """Validate an integer or reciprocal-integer spatial output/input ratio."""
     if not isinstance(scale_factor, Real) or isinstance(scale_factor, bool):
-        raise ValueError(f"scale_factor must be a real number, got {scale_factor!r}")
+        raise TypeError(f"scale_factor must be a real number, got {scale_factor!r}")
     scale_factor = float(scale_factor)
     if not math.isfinite(scale_factor) or scale_factor <= 0:
         raise ValueError(
@@ -278,17 +278,17 @@ def _ome_zarr_array(store_dir: Path) -> zarr.Array:
     group = zarr.open_group(str(store_dir), mode="r")
     ome = group.attrs.get("ome")
     if not isinstance(ome, dict):
-        raise ValueError(f"Missing OME metadata in {store_dir}")
+        raise TypeError(f"Missing OME metadata in {store_dir}")
     multiscales = ome.get("multiscales")
     if not isinstance(multiscales, list) or not multiscales:
-        raise ValueError(f"Missing OME multiscales metadata in {store_dir}")
+        raise TypeError(f"Missing OME multiscales metadata in {store_dir}")
     multiscale = multiscales[0]
     if not isinstance(multiscale, dict):
-        raise ValueError(f"Invalid OME multiscales metadata in {store_dir}")
+        raise TypeError(f"Invalid OME multiscales metadata in {store_dir}")
 
     axes = multiscale.get("axes")
     if not isinstance(axes, list):
-        raise ValueError(f"Missing OME axes metadata in {store_dir}")
+        raise TypeError(f"Missing OME axes metadata in {store_dir}")
     axis_names = tuple(
         axis.get("name") if isinstance(axis, dict) else None for axis in axes
     )
@@ -299,13 +299,13 @@ def _ome_zarr_array(store_dir: Path) -> zarr.Array:
 
     datasets = multiscale.get("datasets")
     if not isinstance(datasets, list) or not datasets:
-        raise ValueError(f"Missing OME multiscale datasets in {store_dir}")
+        raise TypeError(f"Missing OME multiscale datasets in {store_dir}")
     dataset = datasets[0]
     if not isinstance(dataset, dict) or not isinstance(dataset.get("path"), str):
-        raise ValueError(f"Invalid OME multiscale dataset in {store_dir}")
+        raise TypeError(f"Invalid OME multiscale dataset in {store_dir}")
     array = group[cast(str, dataset["path"])]
     if not isinstance(array, zarr.Array):
-        raise ValueError(
+        raise TypeError(
             f"OME multiscale path {dataset['path']!r} in {store_dir} is not an array"
         )
     if array.ndim != 4:
@@ -313,7 +313,7 @@ def _ome_zarr_array(store_dir: Path) -> zarr.Array:
             f"Expected a 4D TCYX array in {store_dir}, got shape={array.shape}"
         )
     if not isinstance(array.metadata, ArrayV3Metadata):
-        raise ValueError(f"Expected a Zarr v3 array in {store_dir}")
+        raise TypeError(f"Expected a Zarr v3 array in {store_dir}")
     if array.metadata.dimension_names != ("t", "c", "y", "x"):
         raise ValueError(
             f"Expected Zarr dimension names ('t', 'c', 'y', 'x') in {store_dir}, "

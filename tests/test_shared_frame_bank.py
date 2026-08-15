@@ -168,8 +168,8 @@ def test_shared_frame_bank_rejects_invalid_scale_factors(tmp_path, scale_factor)
         sequence_id="a",
         frame_files=_write_frame_series(tmp_path / "a", [1]),
     )
-
-    with pytest.raises(ValueError, match="scale_factor"):
+    error_type = TypeError if scale_factor is True else ValueError
+    with pytest.raises(error_type, match="scale_factor"):
         build_shared_frame_bank(
             sequences=(sequence,),
             normalization=None,

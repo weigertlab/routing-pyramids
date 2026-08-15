@@ -22,7 +22,7 @@ requires = ["uv_build>=0.12.5,<0.13.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = ["pyrefly>=0.53.0", "pytest>=9.0.2", "ruff>=0.14.13"]
+dev = ["pyrefly>=0.53.0", "pytest>=9.0.2", "ruff>=0.16.3"]
 analysis = [
     "matplotlib>=3.10.8",
     "pandas",
@@ -34,17 +34,6 @@ analysis = [
 
 [tool.ruff]
 lint.extend-select = ["I001"]
-lint.ignore = [
-    # "B008",
-    # "C408",
-    # "PYI041",
-    # "RUF059",
-    # "TRY004",
-    # "UP033",
-    # "UP037",
-    # "UP045",
-    # "UP046",
-]
 lint.isort.known-first-party = ["routing_pyramids"]
 
 [tool.pyrefly]
