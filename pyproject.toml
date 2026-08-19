@@ -24,7 +24,6 @@ analysis = [
     "seaborn>=0.13.2",
     "scikit-learn>=1.9.0",
     "umap-learn>=0.5.12",
-    "betterplots @ git+https://github.com/maweigert/betterplots@3a2c3bd7646290c5748e463553f33368ea8253bd",
 ]
 
 [build-system]
