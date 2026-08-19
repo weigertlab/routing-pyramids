@@ -5,11 +5,11 @@ from typing import Any, cast
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-from betterplots import set_style
 from matplotlib.colors import hsv_to_rgb
 from torch import Tensor
 from torch.nn import functional as F
 
+from routing_pyramids._vendor.betterplots import set_style
 from routing_pyramids.data.temporal_video_dataset import OMEZarrVideoDataset
 from routing_pyramids.data.transforms import get_normalization, get_transforms
 from routing_pyramids.pyramid_flow_system import (

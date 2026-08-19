@@ -151,15 +151,6 @@ wheels = [
 ]
 
 [[package]]
-name = "betterplots"
-version = "0.1.0"
-source = { git = "https://github.com/maweigert/betterplots?rev=3a2c3bd7646290c5748e463553f33368ea8253bd#3a2c3bd7646290c5748e463553f33368ea8253bd" }
-dependencies = [
-    { name = "numpy" },
-    { name = "seaborn" },
-]
-
-[[package]]
 name = "cmap"
 version = "0.7.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1743,7 +1734,6 @@ dependencies = [
 
 [package.optional-dependencies]
 analysis = [
-    { name = "betterplots" },
     { name = "matplotlib" },
     { name = "pandas" },
     { name = "scikit-learn" },
@@ -1760,7 +1750,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "betterplots", marker = "extra == 'analysis'", git = "https://github.com/maweigert/betterplots?rev=3a2c3bd7646290c5748e463553f33368ea8253bd" },
     { name = "cmap", specifier = ">=0.7.2" },
     { name = "einops", specifier = ">=0.8.1" },
     { name = "lightning" },

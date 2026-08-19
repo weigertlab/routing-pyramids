@@ -3,13 +3,11 @@ import csv
 from dataclasses import dataclass
 from pathlib import Path
 
-import betterplots
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import torch
-from betterplots.boxstripplot import boxstripplot
 from cmap import Colormap as CmapColormap
 from matplotlib.axes import Axes
 from matplotlib.cm import ScalarMappable
@@ -24,6 +22,8 @@ from torch import Tensor
 from torch.utils.data import DataLoader
 from umap import UMAP
 
+from routing_pyramids._vendor.betterplots import set_style
+from routing_pyramids._vendor.betterplots.boxstripplot import boxstripplot
 from routing_pyramids.data.temporal_datamodule import BBBC013VideoDataModule
 from routing_pyramids.pyramid_flow_system import (
     PyramidFlowDecoder2d,
@@ -77,7 +77,7 @@ CONCENTRATION_DISPLAY_UNITS = {
 
 device = torch.device("cpu" if FORCE_CPU or not torch.cuda.is_available() else "cuda")
 print(f"Using device: {device}")
-betterplots.set_style(
+set_style(
     usetex=False,
     serif=True,
     font_size=8,
