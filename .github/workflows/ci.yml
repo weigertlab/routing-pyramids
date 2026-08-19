@@ -37,7 +37,7 @@ jobs:
           cache-dependency-glob: uv.lock
 
       - name: Install the project
-        run: uv sync --locked --dev
+        run: uv sync --locked --dev --extra analysis
 
       - name: Check formatting
         run: uv run ruff format --check
