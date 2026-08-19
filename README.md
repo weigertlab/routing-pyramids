@@ -1,7 +1,8 @@
-# Routing Pyramids
+# Generative Routing Pyramids
 
 Official implementation of
-_Unsupervised Learning of Cell Instances with Generative Routing Pyramids_.
+_Unsupervised Learning of Cell Instances with Generative Routing Pyramids_
+([arXiv](http://arxiv.org/abs/2608.16810)).
 
 ## Install
 
